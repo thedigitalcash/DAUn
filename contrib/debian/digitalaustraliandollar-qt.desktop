@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=DigitalAustralianDollar Core
+Comment=DigitalAustralianDollar P2P Cryptocurrency
+Comment[fr]=DigitalAustralianDollar, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DigitalAustralianDollar, eşten eşe kriptografik sanal para birimi
+Exec=digitalaustraliandollar-qt %u
+Terminal=false
+Type=Application
+Icon=digitalaustraliandollar128
+MimeType=x-scheme-handler/digitalaustraliandollar;
+Categories=Office;Finance;
+StartupWMClass=DigitalAustralianDollar-qt

@@ -1,0 +1,8 @@
+/usr/bin/digitalaustraliandollar-cli		--	gen_context(system_u:object_r:digitalaustraliandollar_exec_t,s0)
+/usr/sbin/digitalaustraliandollard		--	gen_context(system_u:object_r:digitalaustraliandollar_exec_t,s0)
+/usr/lib(64)?/digitalaustraliandollar/digitalaustraliandollard		--	gen_context(system_u:object_r:digitalaustraliandollar_exec_t,s0)
+
+/etc/digitalaustraliandollar(/.*)?		gen_context(system_u:object_r:digitalaustraliandollar_conf_t,s0)
+/var/lib/digitalaustraliandollar(/.*)?		gen_context(system_u:object_r:digitalaustraliandollar_var_lib_t,s0)
+
+(/var)?/run/digitalaustraliandollard(/.*)?   gen_context(system_u:object_r:digitalaustraliandollar_var_run_t,s0)

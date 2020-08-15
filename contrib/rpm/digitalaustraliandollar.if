@@ -1,0 +1,157 @@
+
+## <summary>policy for digitalaustraliandollar</summary>
+
+
+########################################
+## <summary>
+##	Transition to digitalaustraliandollar.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`digitalaustraliandollar_domtrans',`
+	gen_require(`
+		type digitalaustraliandollar_t, digitalaustraliandollar_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, digitalaustraliandollar_exec_t, digitalaustraliandollar_t)
+')
+
+
+########################################
+## <summary>
+##	Execute digitalaustraliandollar server in the digitalaustraliandollar domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`digitalaustraliandollar_initrc_domtrans',`
+	gen_require(`
+		type digitalaustraliandollar_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, digitalaustraliandollar_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search digitalaustraliandollar lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`digitalaustraliandollar_search_lib',`
+	gen_require(`
+		type digitalaustraliandollar_var_lib_t;
+	')
+
+	allow $1 digitalaustraliandollar_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read digitalaustraliandollar lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`digitalaustraliandollar_read_lib_files',`
+	gen_require(`
+		type digitalaustraliandollar_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, digitalaustraliandollar_var_lib_t, digitalaustraliandollar_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage digitalaustraliandollar lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`digitalaustraliandollar_manage_lib_files',`
+	gen_require(`
+		type digitalaustraliandollar_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, digitalaustraliandollar_var_lib_t, digitalaustraliandollar_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage digitalaustraliandollar lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`digitalaustraliandollar_manage_lib_dirs',`
+	gen_require(`
+		type digitalaustraliandollar_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, digitalaustraliandollar_var_lib_t, digitalaustraliandollar_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a digitalaustraliandollar environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`digitalaustraliandollar_admin',`
+	gen_require(`
+		type digitalaustraliandollar_t;
+		type digitalaustraliandollar_initrc_exec_t;
+		type digitalaustraliandollar_var_lib_t;
+	')
+
+	allow $1 digitalaustraliandollar_t:process { ptrace signal_perms };
+	ps_process_pattern($1, digitalaustraliandollar_t)
+
+	digitalaustraliandollar_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 digitalaustraliandollar_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, digitalaustraliandollar_var_lib_t)
+
+')
+

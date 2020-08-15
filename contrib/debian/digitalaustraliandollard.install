@@ -1,0 +1,3 @@
+usr/local/bin/digitalaustraliandollard usr/bin
+usr/local/bin/digitalaustraliandollar-cli usr/bin
+debian/examples/digitalaustraliandollar.conf etc/digitalaustraliandollar

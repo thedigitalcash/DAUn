@@ -1,0 +1,6 @@
+usr/local/bin/digitalaustraliandollar-qt usr/bin
+share/pixmaps/digitalaustraliandollar32.xpm usr/share/pixmaps
+share/pixmaps/digitalaustraliandollar16.xpm usr/share/pixmaps
+share/pixmaps/digitalaustraliandollar128.png usr/share/pixmaps
+debian/digitalaustraliandollar-qt.desktop usr/share/applications
+debian/digitalaustraliandollar-qt.protocol usr/share/kde4/services/
